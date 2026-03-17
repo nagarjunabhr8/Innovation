@@ -1,0 +1,13 @@
+{
+  "buildCommand": "npm install",
+  "env": {
+    "SPREADSHEET_ID": "@spreadsheet_id",
+    "GOOGLE_CREDENTIALS": "@google_credentials"
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/server.js"
+    }
+  ]
+}
