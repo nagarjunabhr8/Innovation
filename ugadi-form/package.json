@@ -1,0 +1,21 @@
+{
+  "name": "ugadi-habba-2026-form",
+  "version": "1.0.0",
+  "description": "Ugadi Habba 2026 Community Event Form - Sri Tulasi Nivas",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "google-auth-library": "^9.0.0",
+    "googleapis": "^118.0.0"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}

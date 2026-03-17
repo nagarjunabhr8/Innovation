@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sri Tulasi Nivas — Ugadi Habba 2026</title>
+  <style>
+    * {
+      --color-background-primary: #ffffff;
+      --color-background-secondary: #f5f5f5;
+      --color-border-primary: #e0e0e0;
+      --color-border-secondary: #d0d0d0;
+      --color-border-tertiary: #c0c0c0;
+      --color-text-primary: #1a1a1a;
+      --color-text-secondary: #666666;
+      --color-text-danger: #dc2626;
+      --border-radius-lg: 12px;
+      --border-radius-md: 8px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 16px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .card {
+      background: var(--color-background-primary);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: var(--border-radius-lg);
+      padding: 1rem 1.25rem;
+      margin-bottom: 12px;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .vote-btn {
+      padding: 9px 16px;
+      border: 0.5px solid var(--color-border-secondary);
+      border-radius: var(--border-radius-md);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      background: transparent;
+      color: var(--color-text-primary);
+      transition: all 0.15s;
+    }
+
+    .vote-btn:hover {
+      background: var(--color-background-secondary);
+    }
+
+    .vote-btn.sel-green {
+      background: #EAF3DE;
+      border-color: #97C459;
+      color: #3B6D11;
+    }
+
+    .vote-btn.sel-amber {
+      background: #FAEEDA;
+      border-color: #EF9F27;
+      color: #854F0B;
+    }
+
+    .vote-btn.sel-coral {
+      background: #FAECE7;
+      border-color: #F0997B;
+      color: #712B13;
+    }
+
+    .vote-btn.sel-act {
+      background: #EEEDFE;
+      border-color: #AFA9EC;
+      color: #3C3489;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    input[type=text],
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 8px 12px;
+      font-size: 13px;
+      border: 0.5px solid var(--color-border-secondary);
+      border-radius: var(--border-radius-md);
+      background: var(--color-background-primary);
+      color: var(--color-text-primary);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 56px;
+      font-family: inherit;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      background: #FAEEDA;
+      color: #854F0B;
+      border: 0.5px solid #EF9F27;
+      margin: 3px;
+    }
+
+    .tag button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #BA7517;
+      font-size: 14px;
+      padding: 0;
+      line-height: 1;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: var(--border-radius-md);
+      background: #D85A30;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    .submit-btn:hover {
+      background: #993C1D;
+    }
+
+    .submit-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .wa-box {
+      background: #EAF3DE;
+      border: 0.5px solid #97C459;
+      border-radius: var(--border-radius-md);
+      padding: 12px;
+      font-size: 13px;
+      color: #27500A;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin-top: 10px;
+      font-family: inherit;
+    }
+
+    .wa-send {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      background: #25D366;
+      color: #fff;
+      border: none;
+      border-radius: var(--border-radius-md);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 8px;
+      text-decoration: none;
+    }
+
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      background: transparent;
+      color: var(--color-text-primary);
+      border: 0.5px solid var(--color-border-secondary);
+      border-radius: var(--border-radius-md);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 8px;
+      margin-left: 6px;
+    }
+
+    .copy-btn:hover {
+      background: var(--color-background-secondary);
+    }
+
+    .loading {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid #f3f3f3;
+      border-top: 2px solid #D85A30;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+<div style="border-radius:var(--border-radius-lg);background:#712B13;padding:1.25rem 1.25rem 1rem;margin-bottom:12px">
+  <div style="font-size:19px;font-weight:500;color:#FAC775;margin-bottom:4px">Sri Tulasi Nivas — Ugadi Habba 2026 🌸</div>
+  <div style="font-size:13px;color:#F5C4B3;margin-bottom:10px">A community celebration initiative · Share with all residents</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <span class="pill" style="background:#FAEEDA;color:#854F0B">Chaitra Shudda Padyami</span>
+    <span class="pill" style="background:#E1F5EE;color:#085041">All Flats Welcome</span>
+    <span class="pill" style="background:#EEEDFE;color:#3C3489">Lunch Included</span>
+  </div>
+</div>
+
+<div id="form-section">
+
+  <div class="card">
+    <div class="section-label">Your details</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div>
+        <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:4px">Name</div>
+        <input type="text" id="inp-name" placeholder="Your name" oninput="liveUpdate()">
+      </div>
+      <div>
+        <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:4px">Flat no.</div>
+        <input type="text" id="inp-flat" placeholder="e.g. A-201" oninput="liveUpdate()">
+      </div>
+    </div>
+    <div style="margin-top:10px">
+      <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:4px">Members joining</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <input type="range" min="1" max="10" value="2" id="members-range" step="1" style="flex:1" oninput="document.getElementById('members-out').textContent=this.value;liveUpdate()">
+        <span style="font-size:16px;font-weight:500;min-width:20px;color:var(--color-text-primary)" id="members-out">2</span>
+        <span style="font-size:12px;color:var(--color-text-secondary)">members</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-label">Step 1 — Will you join the Ugadi celebration?</div>
+    <div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:10px">Morning puja, Pachadi, Rangoli & Panchanga Shravanam at the common area</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="vote-btn" onclick="sel(this,'celebrate','yes','sel-green',['cel-yes','cel-maybe','cel-no'])" id="cel-yes">Yes, joining!</button>
+      <button class="vote-btn" onclick="sel(this,'celebrate','maybe','sel-amber',['cel-yes','cel-maybe','cel-no'])" id="cel-maybe">Maybe / confirm later</button>
+      <button class="vote-btn" onclick="sel(this,'celebrate','no','sel-coral',['cel-yes','cel-maybe','cel-no'])" id="cel-no">Not this time</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-label">Step 2 — Lunch vote</div>
+    <div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:10px">Final decision by majority — your vote matters!</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <button class="vote-btn" style="text-align:left;padding:12px" onclick="sel(this,'lunch','order','sel-amber',['lunch-order','lunch-potluck']);document.getElementById('potluck-section').style.display='none';liveUpdate()" id="lunch-order">
+        <div style="font-weight:500;font-size:13px">Outside Food Order</div>
+        <div style="font-size:11px;color:var(--color-text-secondary);margin-top:2px">Order from restaurant together</div>
+      </button>
+      <button class="vote-btn" style="text-align:left;padding:12px" onclick="sel(this,'lunch','potluck','sel-green',['lunch-order','lunch-potluck']);document.getElementById('potluck-section').style.display='block';liveUpdate()" id="lunch-potluck">
+        <div style="font-weight:500;font-size:13px">Potluck</div>
+        <div style="font-size:11px;color:var(--color-text-secondary);margin-top:2px">Each family brings a dish</div>
+      </button>
+    </div>
+  </div>
+
+  <div class="card" id="potluck-section" style="display:none">
+    <div class="section-label">Dish you will bring (Potluck)</div>
+    <div id="dish-tags" style="margin-bottom:8px"></div>
+    <div style="display:flex;gap:8px">
+      <input type="text" id="dish-input" placeholder="e.g. Pulihora, Obbattu, Perugu..." style="flex:1" onkeydown="if(event.key==='Enter'){addDish();liveUpdate()}">
+      <button class="vote-btn" onclick="addDish();liveUpdate()">+ Add</button>
+    </div>
+    <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="vote-btn" onclick="sel(this,'vegtype','veg','sel-green',['vt-veg','vt-nonveg']);liveUpdate()" id="vt-veg">Veg only</button>
+      <button class="vote-btn" onclick="sel(this,'vegtype','nonveg','sel-coral',['vt-veg','vt-nonveg']);liveUpdate()" id="vt-nonveg">Non-veg included</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-label">Step 3 — Activities you'd like to join</div>
+    <div id="activities" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+  </div>
+
+  <div class="card">
+    <div class="section-label">Message for the organiser (optional)</div>
+    <textarea id="inp-msg" placeholder="Ideas, dietary needs, or any suggestion..." oninput="liveUpdate()"></textarea>
+  </div>
+
+  <div class="card" style="background:var(--color-background-secondary)">
+    <div class="section-label">Your WhatsApp message preview</div>
+    <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:6px">Updates automatically as you fill the form above</div>
+    <div class="wa-box" id="wa-preview">Fill in your details above to generate your message...</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">
+      <button class="wa-send" id="wa-btn" onclick="openWA()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Send on WhatsApp
+      </button>
+      <button class="copy-btn" onclick="copyMsg()">Copy message</button>
+    </div>
+    <div id="copy-confirm" style="font-size:12px;color:#3B6D11;margin-top:4px;min-height:16px"></div>
+  </div>
+
+  <button class="submit-btn" id="submit-btn" onclick="submitForm()">Submit my participation response</button>
+  <div id="err-msg" style="font-size:12px;color:var(--color-text-danger);text-align:center;margin-top:6px;min-height:16px"></div>
+</div>
+
+<div id="result-section" style="display:none"></div>
+
+<script>
+var votes = { celebrate: null, lunch: null, vegtype: null };
+var dishes = [];
+var actSel = [];
+var actList = ['Rangoli drawing', 'Mango leaf torana', 'Pachadi making', 'Panchanga shravanam', 'Cultural programme', 'Kids games', 'Group photo', 'Decoration help', 'Cooking help'];
+
+var actDiv = document.getElementById('activities');
+actList.forEach(function (a) {
+  var btn = document.createElement('button');
+  btn.className = 'vote-btn';
+  btn.style.fontSize = '12px';
+  btn.style.padding = '6px 12px';
+  btn.textContent = a;
+  btn.onclick = function () {
+    var i = actSel.indexOf(a);
+    if (i > -1) { actSel.splice(i, 1); btn.className = 'vote-btn'; btn.style.fontSize = '12px'; btn.style.padding = '6px 12px'; }
+    else { actSel.push(a); btn.className = 'vote-btn sel-act'; btn.style.fontSize = '12px'; btn.style.padding = '6px 12px'; }
+    liveUpdate();
+  };
+  actDiv.appendChild(btn);
+});
+
+function sel(el, group, val, cls, ids) {
+  votes[group] = val;
+  ids.forEach(function (id) { var b = document.getElementById(id); b.className = 'vote-btn'; });
+  el.className = 'vote-btn ' + cls;
+  liveUpdate();
+}
+
+function addDish() {
+  var inp = document.getElementById('dish-input');
+  var v = inp.value.trim();
+  if (!v) return;
+  dishes.push(v);
+  renderDishes();
+  inp.value = '';
+}
+
+function renderDishes() {
+  var c = document.getElementById('dish-tags');
+  c.innerHTML = '';
+  dishes.forEach(function (d, i) {
+    var tag = document.createElement('span');
+    tag.className = 'tag';
+    tag.innerHTML = d + '<button onclick="removeDish(' + i + ')">×</button>';
+    c.appendChild(tag);
+  });
+}
+
+function removeDish(i) {
+  dishes.splice(i, 1);
+  renderDishes();
+  liveUpdate();
+}
+
+function buildMessage() {
+  var name = document.getElementById('inp-name').value.trim() || '[Name]';
+  var flat = document.getElementById('inp-flat').value.trim() || '[Flat]';
+  var members = document.getElementById('members-range').value;
+  var msg = document.getElementById('inp-msg').value.trim();
+
+  var celebMap = { yes: 'Yes, joining the celebration!', maybe: 'Will confirm shortly', no: 'Not joining this time' };
+  var lunchMap = { order: 'Outside food order', potluck: 'Potluck' };
+  var vegMap = { veg: 'Veg only', nonveg: 'Non-veg included' };
+
+  var lines = [];
+  lines.push('🌸 *Ugadi Habba 2026 — Sri Tulasi Nivas*');
+  lines.push('ఉగాది శుభాకాంక్షలు! 🥭');
+  lines.push('');
+  lines.push('*Name:* ' + name);
+  lines.push('*Flat:* ' + flat);
+  lines.push('*Members joining:* ' + members);
+  lines.push('');
+  lines.push('*Celebration:* ' + (votes.celebrate ? celebMap[votes.celebrate] : '—'));
+  lines.push('*Lunch vote:* ' + (votes.lunch ? lunchMap[votes.lunch] : '—'));
+  if (votes.lunch === 'potluck') {
+    if (dishes.length) lines.push('*Dish(es):* ' + dishes.join(', '));
+    if (votes.vegtype) lines.push('*Food type:* ' + vegMap[votes.vegtype]);
+  }
+  if (actSel.length) lines.push('*Activities:* ' + actSel.join(', '));
+  if (msg) lines.push('');
+  if (msg) lines.push('*Note:* ' + msg);
+  lines.push('');
+  lines.push('_Please share your response with the organiser. Let\'s celebrate together! 🎉_');
+  return lines.join('\n');
+}
+
+function liveUpdate() {
+  var preview = document.getElementById('wa-preview');
+  preview.textContent = buildMessage();
+}
+
+function openWA() {
+  var text = buildMessage();
+  var encoded = encodeURIComponent(text);
+  window.open('https://wa.me/?text=' + encoded, '_blank');
+}
+
+function copyMsg() {
+  var text = buildMessage();
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function () {
+      var c = document.getElementById('copy-confirm');
+      c.textContent = 'Message copied!';
+      setTimeout(function () { c.textContent = ''; }, 2000);
+    });
+  } else {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    var c = document.getElementById('copy-confirm');
+    c.textContent = 'Message copied!';
+    setTimeout(function () { c.textContent = ''; }, 2000);
+  }
+}
+
+function submitForm() {
+  var name = document.getElementById('inp-name').value.trim();
+  var flat = document.getElementById('inp-flat').value.trim();
+  var err = document.getElementById('err-msg');
+  var btn = document.getElementById('submit-btn');
+
+  if (!name) { err.textContent = 'Please enter your name.'; return; }
+  if (!flat) { err.textContent = 'Please enter your flat number.'; return; }
+  if (!votes.celebrate) { err.textContent = 'Please select your celebration response.'; return; }
+  if (!votes.lunch) { err.textContent = 'Please select your lunch preference.'; return; }
+
+  err.textContent = '';
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  var members = document.getElementById('members-range').value;
+  var celebMap = { yes: 'Yes, joining!', maybe: 'Confirming soon', no: 'Not this time' };
+  var lunchMap = { order: 'Outside food order', potluck: 'Potluck' };
+
+  var payload = {
+    name: name,
+    flat: flat,
+    members: members,
+    celebrate: votes.celebrate,
+    lunch: votes.lunch,
+    dishes: dishes,
+    vegtype: votes.vegtype,
+    activities: actSel,
+    message: document.getElementById('inp-msg').value.trim()
+  };
+
+  // Submit to backend
+  fetch('/api/submit', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        // Show success message
+        var rs = document.getElementById('result-section');
+        rs.innerHTML = '<div style="background:#EAF3DE;border:0.5px solid #97C459;border-radius:var(--border-radius-lg);padding:1.5rem;text-align:center">'
+          + '<div style="font-size:28px;color:#3B6D11;margin-bottom:8px">&#10003;</div>'
+          + '<div style="font-size:17px;font-weight:500;color:#3B6D11;margin-bottom:4px">Namaskara, ' + name + '!</div>'
+          + '<div style="font-size:13px;color:#639922;margin-bottom:16px">Your response is noted. Ugadi Habba Shubhashayagalu! 🌸</div>'
+          + '<div style="background:var(--color-background-primary);border-radius:var(--border-radius-md);padding:12px;text-align:left;margin-bottom:12px">'
+          + '<table style="width:100%;font-size:13px;border-collapse:collapse">'
+          + '<tr><td style="color:var(--color-text-secondary);padding:4px 0;width:44%">Flat</td><td style="font-weight:500;color:var(--color-text-primary)">' + flat + '</td></tr>'
+          + '<tr><td style="color:var(--color-text-secondary);padding:4px 0">Members</td><td style="font-weight:500;color:var(--color-text-primary)">' + members + '</td></tr>'
+          + '<tr><td style="color:var(--color-text-secondary);padding:4px 0">Celebration</td><td style="font-weight:500;color:var(--color-text-primary)">' + celebMap[votes.celebrate] + '</td></tr>'
+          + '<tr><td style="color:var(--color-text-secondary);padding:4px 0">Lunch vote</td><td style="font-weight:500;color:var(--color-text-primary)">' + lunchMap[votes.lunch] + '</td></tr>'
+          + (dishes.length ? '<tr><td style="color:var(--color-text-secondary);padding:4px 0">Dishes</td><td style="font-weight:500;color:var(--color-text-primary)">' + dishes.join(', ') + '</td></tr>' : '')
+          + (actSel.length ? '<tr><td style="color:var(--color-text-secondary);padding:4px 0;vertical-align:top">Activities</td><td style="font-weight:500;color:var(--color-text-primary)">' + actSel.join(', ') + '</td></tr>' : '')
+          + '</table></div>'
+          + '<div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:8px">Share your response via WhatsApp</div>'
+          + '<button class="wa-send" style="margin:0 auto" onclick="openWA()">'
+          + '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>'
+          + ' Send on WhatsApp</button>'
+          + '</div>';
+
+        document.getElementById('form-section').style.display = 'none';
+        rs.style.display = 'block';
+      } else {
+        err.textContent = data.error || 'Submission failed. Please try again.';
+        btn.disabled = false;
+        btn.textContent = 'Submit my participation response';
+      }
+    })
+    .catch(err => {
+      console.error('Error:', err);
+      err.textContent = 'Network error. Please try again.';
+      btn.disabled = false;
+      btn.textContent = 'Submit my participation response';
+    });
+}
+
+liveUpdate();
+</script>
+</body>
+</html>
