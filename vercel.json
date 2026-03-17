@@ -1,0 +1,11 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/server.js"
+    }
+  ],
+  "env": {
+    "SPREADSHEET_ID": "1tfdx9_c7U9y-tLQRdLt_AD-9cho-8O0wdUmlZszR0VI"
+  }
+}
