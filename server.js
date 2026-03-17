@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // Google Sheets Setup
-const SPREADSHEET_ID = process.env.SPREADSHEET_ID || '1tfdx9_c7U9y-tLQRdLt_AD-9cho-8O0wdUmlZszR0VI';
+const SPREADSHEET_ID = '1tfdx9_c7U9y-tLQRdLt_AD-9cho-8O0wdUmlZszR0VI';
 const SHEET_NAME = 'Responses';
 const RANGE = `${SHEET_NAME}!A1`;
 
